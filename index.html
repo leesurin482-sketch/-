@@ -1,23 +1,651 @@
 
+
 <!DOCTYPE html>
+
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>평생학습 프로젝트</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>성북 평생학습 통합포털</title>
+
+<style>
+
+:root {
+
+  --green: #176b50;
+
+  --light: #edf5f0;
+
+  --ink: #24332d;
+
+  --gray: #68756f;
+
+  --line: #e2e9e4;
+
+}
+
+* { box-sizing: border-box; }
+
+body {
+
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+
+  color: var(--ink);
+
+  background: #f7f9f7;
+
+  line-height: 1.6;
+
+}
+
+body.large { font-size: 19px; }
+
+body.small { font-size: 14px; }
+
+header {
+
+  background: white;
+
+  border-bottom: 1px solid var(--line);
+
+  padding: 15px 5%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+}
+
+.logo { font-size: 20px; font-weight: 800; color: var(--green); }
+
+.access button, button {
+
+  cursor: pointer;
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  padding: 9px 13px;
+
+  background: white;
+
+  color: var(--ink);
+
+}
+
+button:hover { border-color: var(--green); }
+
+.hero {
+
+  background: var(--light);
+
+  padding: 48px 7% 40px;
+
+}
+
+.hero small { color: var(--green); font-weight: 700; }
+
+.hero h1 { font-size: clamp(28px, 5vw, 43px); margin: 10px 0; }
+
+.hero p { color: var(--gray); }
+
+main { max-width: 1100px; margin: auto; padding: 28px 5%; }
+
+.tabs {
+
+  display: flex;
+
+  gap: 8px;
+
+  overflow-x: auto;
+
+  margin-bottom: 25px;
+
+}
+
+.tabs button { white-space: nowrap; font-weight: 700; }
+
+.tabs button.active {
+
+  background: var(--green);
+
+  color: white;
+
+  border-color: var(--green);
+
+}
+
+.panel { display: none; }
+
+.panel.active { display: block; }
+
+h2 { font-size: 25px; margin-bottom: 5px; }
+
+.sub { color: var(--gray); margin-top: 0; }
+
+.search, select, input {
+
+  padding: 12px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  font: inherit;
+
+  background: white;
+
+  width: 100%;
+
+}
+
+.filters {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+  gap: 10px;
+
+  margin: 15px 0 22px;
+
+}
+
+.cards {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 15px;
+
+}
+
+.card {
+
+  background: white;
+
+  border: 1px solid var(--line);
+
+  border-radius: 13px;
+
+  padding: 19px;
+
+}
+
+.card h3 { margin: 8px 0; font-size: 18px; }
+
+.card p { color: var(--gray); font-size: 14px; margin: 5px 0; }
+
+.tag {
+
+  display: inline-block;
+
+  background: var(--light);
+
+  color: var(--green);
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+.primary {
+
+  background: var(--green);
+
+  color: white;
+
+  border: 0;
+
+  margin-top: 12px;
+
+}
+
+.primary:hover { background: #10543e; }
+
+.formbox {
+
+  background: white;
+
+  border: 1px solid var(--line);
+
+  border-radius: 13px;
+
+  padding: 20px;
+
+  margin: 18px 0;
+
+}
+
+.formbox label { display: block; font-weight: 700; margin: 12px 0 5px; }
+
+.result { margin-top: 20px; }
+
+footer {
+
+  padding: 25px;
+
+  text-align: center;
+
+  color: var(--gray);
+
+  font-size: 13px;
+
+  border-top: 1px solid var(--line);
+
+}
+
+.notice {
+
+  background: #fff8e8;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  color: #795b24;
+
+  margin-top: 20px;
+
+}
+
+@media(max-width:600px) {
+
+  .hero { padding: 35px 6%; }
+
+  main { padding: 22px 4%; }
+
+  header { padding: 12px 4%; }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <h1>모두를 위한 평생학습</h1>
+<header>
 
-    <p>배움의 기회를 더 많은 사람에게</p>
+  <div class="logo">성북 평생학습 통합포털</div>
 
-    <h2>우리의 프로젝트</h2>
+  <div class="access">
 
-    <p>
-        평생학습 프로그램의 참여자 모집과
-        강사 모집 문제를 해결하기 위한 프로젝트입니다.
-    </p>
+    <button onclick="setSize('small')">작게</button>
+
+    <button onclick="setSize('normal')">보통</button>
+
+    <button onclick="setSize('large')">크게</button>
+
+  </div>
+
+</header>
+
+<section class="hero">
+
+  <small>SEONGBUK LIFELONG LEARNING</small>
+
+  <h1>배움이 모이는 곳, 성북</h1>
+
+  <p>우리 동네 강좌를 찾고, 좋은 강사를 만나고,<br>
+
+  새로운 배움의 기회를 연결해 보세요.</p>
+
+</section>
+
+<main>
+
+  <nav class="tabs">
+
+    <button class="active" onclick="showTab('courses',this)">강좌 찾기</button>
+
+    <button onclick="showTab('teachers',this)">강사풀</button>
+
+    <button onclick="showTab('matching',this)">강의 매칭</button>
+
+  </nav>
+
+  <section id="courses" class="panel active">
+
+    <h2>교육 프로그램 통합 검색</h2>
+
+    <p class="sub">기관별로 흩어진 평생학습 프로그램을 한곳에서 찾아보세요.</p>
+
+    <input class="search" id="courseSearch" placeholder="강좌명 또는 기관명 검색" oninput="renderCourses()">
+
+    <div class="filters">
+
+      <select id="courseField" onchange="renderCourses()">
+
+        <option value="">전체 분야</option>
+
+        <option>인문교양</option>
+
+        <option>디지털·AI</option>
+
+        <option>문화예술</option>
+
+        <option>건강·운동</option>
+
+      </select>
+
+      <select id="courseOrg" onchange="renderCourses()">
+
+        <option value="">전체 기관</option>
+
+        <option>성북구평생학습관</option>
+
+        <option>동평생학습센터</option>
+
+        <option>성북50플러스센터</option>
+
+      </select>
+
+    </div>
+
+    <div class="cards" id="courseList"></div>
+
+  </section>
+
+  <section id="teachers" class="panel">
+
+    <h2>강사풀</h2>
+
+    <p class="sub">분야와 강의 경력에 맞는 강사를 검색해 보세요.</p>
+
+    <input class="search" id="teacherSearch" placeholder="강사명 또는 강의 분야 검색" oninput="renderTeachers()">
+
+    <div class="filters">
+
+      <select id="regionFilter" onchange="renderTeachers()">
+
+        <option value="">타지역 강의 경력 전체</option>
+
+        <option value="yes">있음</option>
+
+        <option value="no">없음</option>
+
+      </select>
+
+      <select id="bookFilter" onchange="renderTeachers()">
+
+        <option value="">저서 여부 전체</option>
+
+        <option value="yes">있음</option>
+
+        <option value="no">없음</option>
+
+      </select>
+
+    </div>
+
+    <div class="cards" id="teacherList"></div>
+
+  </section>
+
+  <section id="matching" class="panel">
+
+    <h2>강의 매칭</h2>
+
+    <p class="sub">기관에서 필요한 강의 조건을 입력하면 적합한 강사를 추천합니다.</p>
+
+    <div class="formbox">
+
+      <label for="matchField">희망 강의 분야</label>
+
+      <select id="matchField">
+
+        <option>인문교양</option>
+
+        <option>디지털·AI</option>
+
+        <option>문화예술</option>
+
+        <option>건강·운동</option>
+
+      </select>
+
+      <label for="matchRegion">희망 지역</label>
+
+      <select id="matchRegion">
+
+        <option>성북구</option>
+
+        <option>서울 전체</option>
+
+        <option>지역 무관</option>
+
+      </select>
+
+      <label for="matchAudience">주요 수강 대상</label>
+
+      <select id="matchAudience">
+
+        <option>성인</option>
+
+        <option>청년</option>
+
+        <option>중장년</option>
+
+        <option>전 연령</option>
+
+      </select>
+
+      <button class="primary" onclick="matchTeachers()">조건에 맞는 강사 찾기</button>
+
+    </div>
+
+    <div class="result" id="matchResult"></div>
+
+  </section>
+
+  <div class="notice">
+
+    ※ 현재 화면은 해커톤 발표용 시제품입니다. 강좌 및 강사 정보는 기능 시연을 위한 가상 예시이며 실제 등록 정보가 아닙니다.
+
+  </div>
+
+</main>
+
+<footer>
+
+  성북 평생학습 통합포털 개편 제안 · 해커톤 시제품
+
+</footer>
+
+<script>
+
+const courses = [
+
+  {name:"AI로 만드는 나만의 사진과 영상",org:"성북구평생학습관",field:"디지털·AI",date:"2026.11.10 ~ 11.30",status:"모집 중"},
+
+  {name:"생활 속 경제와 금융 이해",org:"동평생학습센터",field:"인문교양",date:"2026.11.12 ~ 12.03",status:"모집 중"},
+
+  {name:"수채화로 만나는 우리 동네",org:"성북50플러스센터",field:"문화예술",date:"2026.11.15 ~ 12.10",status:"모집 예정"},
+
+  {name:"건강한 생활을 위한 스트레칭",org:"동평생학습센터",field:"건강·운동",date:"2026.11.18 ~ 12.09",status:"모집 중"},
+
+  {name:"인공지능과 일상생활",org:"성북구평생학습관",field:"디지털·AI",date:"2026.11.20 ~ 12.11",status:"모집 중"},
+
+  {name:"고전문학 함께 읽기",org:"성북50플러스센터",field:"인문교양",date:"2026.12.01 ~ 12.22",status:"모집 예정"}
+
+];
+
+const teachers = [
+
+  {name:"김민지",field:"디지털·AI",career:"서울 지역 디지털 교육 5년",region:"yes",book:"yes",audience:"성인"},
+
+  {name:"이준호",field:"인문교양",career:"인문학 강의 7년",region:"no",book:"yes",audience:"중장년"},
+
+  {name:"박서연",field:"문화예술",career:"문화센터 강의 4년",region:"yes",book:"no",audience:"전 연령"},
+
+  {name:"최현우",field:"건강·운동",career:"생활체육 강의 6년",region:"no",book:"no",audience:"성인"},
+
+  {name:"정유진",field:"디지털·AI",career:"청년 디지털 교육 3년",region:"yes",book:"no",audience:"청년"}
+
+];
+
+function showTab(id,button) {
+
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+
+  document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+
+  document.getElementById(id).classList.add("active");
+
+  button.classList.add("active");
+
+}
+
+function setSize(size) {
+
+  document.body.classList.remove("small","large");
+
+  if(size==="small") document.body.classList.add("small");
+
+  if(size==="large") document.body.classList.add("large");
+
+}
+
+function renderCourses() {
+
+  const q=document.getElementById("courseSearch").value.toLowerCase();
+
+  const field=document.getElementById("courseField").value;
+
+  const org=document.getElementById("courseOrg").value;
+
+  const filtered=courses.filter(c=>
+
+    (c.name+c.org).toLowerCase().includes(q) &&
+
+    (!field||c.field===field) &&
+
+    (!org||c.org===org)
+
+  );
+
+  document.getElementById("courseList").innerHTML=filtered.length ? filtered.map(c=>`
+
+    <article class="card">
+
+      <span class="tag">${c.field}</span>
+
+      <h3>${c.name}</h3>
+
+      <p>기관 · ${c.org}</p>
+
+      <p>기간 · ${c.date}</p>
+
+      <p>상태 · ${c.status}</p>
+
+      <button onclick="alert('시제품입니다. 실제 신청 페이지 연동은 추후 구현합니다.')">강좌 상세 보기</button>
+
+    </article>`).join("") : "<p>검색 결과가 없습니다.</p>";
+
+}
+
+function renderTeachers() {
+
+  const q=document.getElementById("teacherSearch").value.toLowerCase();
+
+  const region=document.getElementById("regionFilter").value;
+
+  const book=document.getElementById("bookFilter").value;
+
+  const filtered=teachers.filter(t=>
+
+    (t.name+t.field+t.career).toLowerCase().includes(q) &&
+
+    (!region||t.region===region) &&
+
+    (!book||t.book===book)
+
+  );
+
+  document.getElementById("teacherList").innerHTML=filtered.length ? filtered.map(t=>`
+
+    <article class="card">
+
+      <span class="tag">${t.field}</span>
+
+      <h3>${t.name} 강사</h3>
+
+      <p>${t.career}</p>
+
+      <p>타지역 강의 경력 · ${t.region==="yes"?"있음":"없음"}</p>
+
+      <p>저서 · ${t.book==="yes"?"있음":"없음"}</p>
+
+      <p>주요 대상 · ${t.audience}</p>
+
+    </article>`).join("") : "<p>검색 결과가 없습니다.</p>";
+
+}
+
+function matchTeachers() {
+
+  const field=document.getElementById("matchField").value;
+
+  const audience=document.getElementById("matchAudience").value;
+
+  const matched=teachers.filter(t=>
+
+    t.field===field &&
+
+    (audience==="전 연령"||t.audience===audience||t.audience==="전 연령"||audience==="성인")
+
+  );
+
+  document.getElementById("matchResult").innerHTML=`
+
+    <h3>추천 결과</h3>
+
+    ${matched.length ? matched.map(t=>`
+
+      <article class="card">
+
+        <span class="tag">분야 일치</span>
+
+        <h3>${t.name} 강사</h3>
+
+        <p>${t.field} · ${t.career}</p>
+
+        <p>주요 대상 · ${t.audience}</p>
+
+      </article>`).join("") : "<p>조건에 맞는 강사가 없습니다. 조건을 바꿔 다시 검색해 보세요.</p>"}
+
+    <p class="sub">※ 시제품의 분야·대상 조건 기반 예시 추천입니다.</p>`;
+
+}
+
+renderCourses();
+
+renderTeachers();
+
+</script>
 
 </body>
+
 </html>
